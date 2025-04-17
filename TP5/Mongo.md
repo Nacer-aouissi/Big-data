@@ -24,10 +24,15 @@ in command : mongo.exe
 ### Creating database :
 
 -in mongo.exe, we can run the commands :
-*use info : creating db info or switching to it if exists
-!Logo(useinfo.png)
-*inserting the first element using : db.products.insertOne({...})
-!logo(Fileinsertion.png)
+
+- use info : creating db info or switching to it if exists
+
+![Logo](useinfo.png)
+
+- inserting the first element using : db.products.insertOne({...})
+
+![logo](Fileinsertion.png)
+
 than we insert all the products.
 
 ### Reading :

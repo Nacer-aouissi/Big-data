@@ -27,11 +27,7 @@ in command : mongo.exe
 
 - use info : creating db info or switching to it if exists
 
-![Logo](useinfo.png)
-
 - inserting the first element using : db.products.insertOne({...})
-
-![logo](Fileinsertion.png)
 
 than we insert all the products.
 

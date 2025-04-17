@@ -4,12 +4,7 @@ in this work we will learn how to use docker
 
 ## Steps :
 
--creating dockerhub account
--image creation
--pushing to dockerhub
--creating network
--launching containers
--checking network
+-[creating_dockerhub_account] -[image_creation] -[push_to_dockerhub] -[creating_network] -[launching] -[checking_network]
 
 ### creating dockerhub account :
 
@@ -42,25 +37,25 @@ EXPOSE 8888
 ```
 
 after that in cmd run the commnd :
-<docker build -t username/img name .>
+<docker build -t username/img_name .>
 
 ### Pushing to dockerhub:
 
 - first login to dockerhub using : docker login
-- second push using command : docker push username/img name
+- second push using command : docker push username/img_name
 
 ### Create the Docker Network
 
-use command : docker network create network name
+use command : docker network create network_name
 
 ### Launching the containers :
 
 - to launch the 3 containers use command :
   - pull the image from docker hub using : docker pull yourdockerhubusername/tp03image
   - use the command :
-    docker run -d --name container1 --network network name -p 8881:8888 usename/img name
-    docker run -d --name container2 --network network name -p 8881:8888 usename/img name
-    docker run -d --name container3 --network network name -p 8881:8888 usename/img name
+    docker run -d --name container1 --network network_name -p 8881:8888 usename/img_name
+    docker run -d --name container2 --network network_name -p 8881:8888 usename/img_name
+    docker run -d --name container3 --network network_name -p 8881:8888 usename/img_name
 
 ### Checking network :
 

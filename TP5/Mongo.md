@@ -4,31 +4,35 @@ Creating a NoSQL database : mongoDB
 
 ## Steps :
 
-- [Installation]
-- [Mongo-server]
-- [Mongo-client]
-- [Creating_DB]
+    - Installation
+    - launching Mongo-server
+    - launching Mongo-client
+    - Creating_DB
 
 ### Installation :
 
-creating directory : C:\data\db
+    creating directory : C:\data\db
 
-### Mongo server :
+### Launching Mongo server :
 
-in command : .bin\monogd.exe
+    in command : .bin\monogd.exe
 
-### Mongo client :
+### Launching Mongo client :
 
-in command : mongo.exe
+    in command : mongo.exe
 
 ### Creating database :
 
--in mongo.exe, we can run the commands :
-*use info : creating db info or switching to it if exists
-![Logo](useinfo.png)
-*inserting the first element using : db.products.insertOne({...})
-![logo](Fileinsertion.png)
-than we insert all the products.
+    -in mongo.exe, we can run the commands :
+    *use info : creating db info or switching to it if exists
+
+    ![Logo](useinfo.png)
+
+    *inserting the first element using : db.products.insertOne({...})
+
+    ![logo](Fileinsertion.png)
+
+    than we insert all the products.
 
 ### Reading :
 

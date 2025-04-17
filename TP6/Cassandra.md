@@ -4,7 +4,12 @@ creating and working in db using cassandra
 
 ## steps :
 
--[Installation] -[cqlsh] -[db_creation] -[datasets] -[importing_data] -[Queries]
+-Installation
+-runinng cqlsh
+-database creation
+-datasets
+-importing data
+-Queries
 
 ### Installation :
 
@@ -27,10 +32,10 @@ to enter cqlsh in terminal we run the next command :
 
 in cqlsh run this command :
 
-CREATE KEYSPACE IF NOT EXISTS resto_NY
-WITH REPLICATION = { 'class': 'SimpleStrategy', 'replication_factor': 1 };
+CREATE KEYSPACE IF NOT EXISTS resto NY
+WITH REPLICATION = { 'class': 'SimpleStrategy', 'replication factor': 1 };
 
-USE resto_NY;
+USE resto NY;
 
 CREATE TABLE Restaurant (
 id INT,
@@ -44,7 +49,7 @@ CuisineType VARCHAR,
 PRIMARY KEY (id)
 );
 
-CREATE INDEX fk_Restaurant_cuisine ON Restaurant (CuisineType);
+CREATE INDEX fk Restaurant cuisine ON Restaurant (CuisineType);
 
 CREATE TABLE Inspection (
 idRestaurant INT,
@@ -57,30 +62,30 @@ Grade VARCHAR,
 PRIMARY KEY (idRestaurant, InspectionDate)
 );
 
-CREATE INDEX fk_Inspection_Restaurant ON Inspection (Grade);
+CREATE INDEX fk Inspection Restaurant ON Inspection (Grade);
 
-- this command creates a db named resto_NY than create 2 tables named : Restaurant and Inspection
+- this command creates a db named resto NY than create 2 tables named : Restaurant and Inspection
 
 ### imoorting datasets to database :
 
 - first of all : run docker ps to get cassandra's container id
 - second go where the dataset in and get file path
 - third launch this commands :
-  <docker cp file_path container_ID >
+  <docker cp file path container ID >
 - after uploading datasets to the container open cqlsh and run :
-  USE resto_NY;
+  USE resto NY;
 
 COPY Restaurant (id, name, borough, buildingnum, street, zipcode, phone, cuisinetype)
 FROM '/restaurants.csv' WITH DELIMITER=',';
 
 COPY Inspection (idrestaurant, inspectiondate, violationcode, violationdescription, criticalflag, score, grade)
-FROM '/restaurants_inspections.csv' WITH DELIMITER=',';
+FROM '/restaurants inspections.csv' WITH DELIMITER=',';
 
 - this copy the files u have to the tables u created before
 - than check if the data copied successfuly or not by typing this querys :
 
-SELECT count(_) FROM Restaurant;
-SELECT count(_) FROM Inspection;
+SELECT count( ) FROM Restaurant;
+SELECT count( ) FROM Inspection;
 
 ## Queries :
 

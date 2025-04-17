@@ -4,7 +4,12 @@ in this work we will learn how to use docker
 
 ## Steps :
 
--[creating_dockerhub_account] -[image_creation] -[push_to_dockerhub] -[creating_network] -[launching] -[checking_network]
+- creating_dockerhub_account
+- image_creation
+- push_to_dockerhub
+- creating_network
+- launching
+- checking_network
 
 ### creating dockerhub account :
 
@@ -21,7 +26,7 @@ FROM jupyter/base-notebook
 # Install required Python packages
 RUN pip install --no-cache-dir \
     pandas \
-    dask[dataframe] \
+    daskdataframe \
     matplotlib \
     seaborn \
     scikit-learn

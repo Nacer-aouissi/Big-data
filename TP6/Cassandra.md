@@ -4,7 +4,12 @@ creating and working in db using cassandra
 
 ## steps :
 
--[Installation] -[cqlsh] -[db_creation] -[datasets] -[importing_data] -[Queries]
+- Install tion
+- cqlsh
+- db_creatio
+- datasets
+- importing data
+- Queries
 
 ### Installation :
 

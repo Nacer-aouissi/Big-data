@@ -4,10 +4,10 @@ Creating a NoSQL database : mongoDB
 
 ## Steps :
 
-- [Installation]
-- [Mongo-server]
-- [Mongo-client]
-- [Creating_DB]
+- Installation
+- Mongo-server
+- Mongo-client
+- Creating DB
 
 ### Installation :
 
@@ -25,9 +25,9 @@ in command : mongo.exe
 
 -in mongo.exe, we can run the commands :
 *use info : creating db info or switching to it if exists
-![Logo](useinfo.png)
+!Logo(useinfo.png)
 *inserting the first element using : db.products.insertOne({...})
-![logo](Fileinsertion.png)
+!logo(Fileinsertion.png)
 than we insert all the products.
 
 ### Reading :

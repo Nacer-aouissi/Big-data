@@ -2,7 +2,9 @@
 
 ## step 1 : intallation & Lanching :
 
-- downloading jdk & kafak binary
+- downloading jdk & kafak binary : 
+   *https://kafka.apache.org/downloads
+   *https://www.oracle.com/th/java/technologies/downloads/
 - modifyng zookeeper & server.properties in config :
   setting the path : C:/kafka
 - running the commands :

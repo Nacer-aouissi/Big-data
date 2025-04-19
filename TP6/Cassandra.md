@@ -96,12 +96,17 @@ SELECT count(_) FROM Inspection;
 - Get inspection dates and grades for restaurant with ID 41569764 :
   SELECT inspectiondate, grade FROM Inspection WHERE idrestaurant = 41569764;
 - List names of restaurants that serve French cuisine
+ SELECT name FROM Restaurant WHERE CuisineType = 'French' ALLOW FILTERING;
 - List names of restaurants located in BROOKLYN :
   SELECT name FROM Restaurant WHERE borough = 'BROOKLYN' ALLOW FILTERING;
 - Get grades and scores for inspections of restaurant 41569764 with a score of at least 10
   SELECT grade, score FROM Inspection
   WHERE idrestaurant = 41569764 AND score >= 10 ALLOW FILTERING;
 - Get non-null grades from inspections where the score is greater than 30 :
-  SELECT grade FROM Inspection WHERE score > 30 ALLOW FILTERING;
+  SELECT grade FROM Inspection 
+WHERE score > 30 AND grade IN ('A', 'B', 'C') ALLOW FILTERING;
+SELECT grade FROM Inspection 
+WHERE score > 30 AND grade IS NOT NULL ALLOW FILTERING;
 - Count how many rows the previous query would return :
-  SELECT count(\*) FROM Inspection WHERE score > 30 ALLOW FILTERING;
+SELECT count(*) FROM Inspection 
+WHERE score > 30 AND grade IN ('A', 'B', 'C') ALLOW FILTERING;

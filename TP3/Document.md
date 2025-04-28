@@ -52,6 +52,8 @@ df[col] = label_enc.fit_transform(df[col])
 
 Visualized sales trends, income distribution, and attrition counts using Seaborn/Matplotlib Analyzed correlations between features
 
+- Analysis file link : https://limewire.com/d/LWv94#8XEhgyQAsF
+
 - Advanced Analysis:
 
 Built a Random Forest classifier to predict employee attrition

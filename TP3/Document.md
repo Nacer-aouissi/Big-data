@@ -1,116 +1,115 @@
-# Project Documentation
+# 📊 HR Analytics – Employee Attrition & Performance Analysis
 
-## Project Title:
+![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
+![Pandas](https://img.shields.io/badge/Pandas-1.3+-green.svg)
+![Scikit-learn](https://img.shields.io/badge/Scikit--learn-1.0+-orange.svg)
+![Power BI](https://img.shields.io/badge/Power%20BI-Desktop-purple.svg)
 
-HR Analytics – Employee Attrition & Performance Analysis
+## 📁 Data Sources and Collection
 
-## Data Sources and Collection Methods :
+| Property        | Value                                                                                                          |
+| --------------- | -------------------------------------------------------------------------------------------------------------- |
+| **Dataset**     | IBM HR Analytics Employee Attrition & Performance                                                              |
+| **Source**      | Excel BI Analytics                                                                                             |
+| **Format**      | CSV                                                                                                            |
+| **Size**        | ~500MB                                                                                                         |
+| **Description** | Detailed employee records including demographics, job roles, satisfaction scores, income, and attrition status |
 
-- Dataset Used: IBM HR Analytics Employee Attrition & Performance
+## 🔧 Data Cleaning and Transformation
 
-- Source: Downloaded from Excel BI Analytics
+### 🧹 Data Cleaning Steps
 
-- File Format: CSV
+```python
+# Remove duplicates
+df = df.drop_duplicates()
 
-- Size: ~500MB
+# Handle missing values
+df.dropna()  # Remove rows with nulls
 
-- Description: The dataset contains detailed records of employees, including demographics, job roles, satisfaction scores, income, and whether they left the company or not (Attrition)
-
-## Data Cleaning and Transformation :
-
-- Performed using Python (Pandas & Scikit-learn):
-
-`df = df.drop_duplicates()`
-
-- Handled Missing Values:
-
-- Dropped rows with nulls using : `df.dropna()`
-
-- Optionally filtered out columns with excessive missing data
-
-- Converted Categorical Columns to Numerical:
-
-Used LabelEncoder from sklearn to encode fields like Gender, JobRole, Department, etc.
-
-```
+# Convert categorical columns
 from sklearn.preprocessing import LabelEncoder
 for col in categorical_columns:
-df[col] = label_enc.fit_transform(df[col])
+    df[col] = label_enc.fit_transform(df[col])
+
+# Map target column
+df['Attrition'] = df['Attrition'].map({'Yes': 1, 'No': 0})
+
+# Export cleaned data
+df.to_csv("HR_Analytics_Cleaned.csv", index=False)
 ```
 
-- Mapped Target Column (Attrition) to binary:
+## 📊 Analysis and Insights
 
-`df['Attrition'] = df['Attrition'].map({'Yes': 1, 'No': 0})`
+### 🔍 Exploratory Data Analysis (EDA)
 
-- Exported the cleaned dataset:
+- 📈 Sales trends visualization
+- 💰 Income distribution analysis
+- 👥 Attrition pattern analysis
+- 🔗 Feature correlation study
 
-`df.to_csv("HR_Analytics_Cleaned.csv", index=False)`
+> 📊 **Analysis Dashboard**: [View Analysis](https://limewire.com/d/LWv94#8XEhgyQAsF)
 
-## Analysis Performed and Insights Derived :
+### 🤖 Machine Learning Analysis
 
-- EDA (Exploratory Data Analysis):
+#### Random Forest Classifier
 
-Visualized sales trends, income distribution, and attrition counts using Seaborn/Matplotlib Analyzed correlations between features
-
-- Analysis file link : https://limewire.com/d/LWv94#8XEhgyQAsF
-
-- Advanced Analysis:
-
-Built a Random Forest classifier to predict employee attrition
-
-Evaluated model using Accuracy, Precision, Recall, and Confusion Matrix
-
-```
+```python
+# Model Evaluation
 accuracy_score(y_test, y_pred)
 classification_report(y_test, y_pred)
 ```
 
-- Key Insights:
+#### Key Findings 🔑
 
-Job Satisfaction and Monthly Income had a noticeable relationship with attrition
+1. 🎯 Job Satisfaction Impact
 
-Departments with higher travel or lower satisfaction scored higher in employee exits
+   - Strong correlation with attrition rates
+   - Critical factor in employee retention
 
-## Power BI Dashboard Usage :
+2. 💵 Income Influence
 
-### File Used:
+   - Direct relationship with employee turnover
+   - Higher income brackets show lower attrition
 
-Analyses.pbix
+3. 🏢 Department Patterns
+   - Higher travel requirements → Increased attrition
+   - Lower satisfaction scores → Higher exit rates
 
-### Data Source:
+## 📱 Power BI Dashboard
 
-HR_Analytics_Cleaned.csv
+### 📂 Dashboard Components
 
-### Dashboard Features:
+#### 1. Overview Page
 
-- Overview Page:
+- 👥 Employee Count KPI
+- 📉 Attrition Rate Metrics
 
-Total number of employees
+#### 2. Visualizations
 
-Attrition rate as KPI cards
+- 🥧 Pie Chart: Attrition Distribution
+- 📊 Column Chart: Income Distribution
+- 📈 Bar Chart: Department-wise Attrition
+- 🔥 Heatmap: Job Satisfaction vs Attrition
 
-- Visualizations:
+#### 3. Interactive Features
 
-- Pie Chart: Employee Attrition Rate
+- 🔍 Slicers:
+  - Gender
+  - Job Role
+  - Education Level
+- 🔎 Drill-through Capabilities
+  - Detailed attrition metrics
+  - Role-specific analysis
 
-- Column Chart: Monthly Income Distribution (binned)
+### 🚀 How to Use the Dashboard
 
-- Bar Chart: Attrition by Department
+1. 📂 Open `Analyses.pbix` in Power BI Desktop
+2. 🔍 Use top slicers for group exploration
+3. 👆 Right-click for detailed drill-through
+4. 📊 Apply filters for comparative analysis
 
-- Matrix Table: Job Satisfaction vs Attrition (heatmap style)
+---
 
-- Interactive Elements:
-
-Slicers for filtering by Gender, Job Role, and Education
-
-Drillthrough enabled on Job Role to show detailed attrition metrics
-
-- How to Use:
-
-Open the Analyses.pbix file in Power BI Desktop
-
-Use slicers at the top to explore specific groups
-
-Right-click any bar or data point → Drillthrough to deep-dive
-
-Use filters to compare trends across departments, gender, and income levels
+<div align="center">
+  <sub>Built with ❤️ by Your Name</sub>
+</div>

@@ -1,28 +1,35 @@
-# Hadoop Setup and Word Count Implementation Guide
+# 🐘 Hadoop Setup and Word Count Implementation Guide
 
-## Table of Contents
+![Hadoop](https://img.shields.io/badge/Hadoop-3.3+-blue.svg)
+![Java](https://img.shields.io/badge/Java-1.8-red.svg)
+![Docker](https://img.shields.io/badge/Docker-20.10+-green.svg)
+![Maven](https://img.shields.io/badge/Maven-3.8+-orange.svg)
 
-- [Prerequisites](#prerequisites)
-- [Step 1: Creating Docker Network](#step-1-creating-docker-network)
-- [Step 2: Launching Containers](#step-2-launching-containers)
-- [Step 3: Setting Up Hadoop and Uploading Files](#step-3-setting-up-hadoop-and-uploading-files)
-- [Step 4: Creating Maven Project Files](#step-4-creating-maven-project-files)
-- [Step 5: Building the Project](#step-5-building-the-project)
-- [Step 6: Uploading JAR to Docker](#step-6-uploading-jar-to-docker)
-- [Step 7: Launching MapReduce Job](#step-7-launching-mapreduce-job)
-- [Step 8: Checking Results](#step-8-checking-results)
-- [Step 9: Monitoring Your Job](#step-9-monitoring-your-job)
+## 📑 Table of Contents
 
-## Prerequisites
+- [⚙️ Prerequisites](#prerequisites)
+- [🌐 Step 1: Creating Docker Network](#step-1-creating-docker-network)
+- [🚀 Step 2: Launching Containers](#step-2-launching-containers)
+- [📁 Step 3: Setting Up Hadoop](#step-3-setting-up-hadoop-and-uploading-files)
+- [📝 Step 4: Creating Maven Project](#step-4-creating-maven-project-files)
+- [🏗️ Step 5: Building the Project](#step-5-building-the-project)
+- [📤 Step 6: Uploading JAR](#step-6-uploading-jar-to-docker)
+- [▶️ Step 7: Launching MapReduce](#step-7-launching-mapreduce-job)
+- [📊 Step 8: Checking Results](#step-8-checking-results)
+- [📈 Step 9: Monitoring](#step-9-monitoring-your-job)
 
-Before starting, ensure you have the following installed and configured:
+## ⚙️ Prerequisites
 
-1. Docker installed and running
-2. Java (JDK 1.8)
-3. Visual Studio Code with Java & Maven extensions
-4. Basic understanding of terminal commands
+Before starting, ensure you have:
 
-## Step 1: Creating Docker Network
+| Requirement | Version |
+| ----------- | ------- |
+| 🐳 Docker   | Latest  |
+| ☕ Java     | JDK 1.8 |
+| 💻 VS Code  | Latest  |
+| 📦 Maven    | 3.8+    |
+
+## 🌐 Step 1: Creating Docker Network
 
 Create a Docker network for Hadoop cluster communication:
 
@@ -30,20 +37,27 @@ Create a Docker network for Hadoop cluster communication:
 docker network create hadoop
 ```
 
-## Step 2: Launching Containers
+## 🚀 Step 2: Launching Containers
 
 Launch the Hadoop master and worker nodes:
 
 ```bash
 # Launch master node
-docker run -itd --net=hadoop -p 9870:9870 -p 8088:8088 --name hadoop-master --hostname hadoop-master liliasfaxi/hadoop-cluster:latest
+docker run -itd --net=hadoop -p 9870:9870 -p 8088:8088 \
+  --name hadoop-master --hostname hadoop-master \
+  liliasfaxi/hadoop-cluster:latest
 
 # Launch worker nodes
-docker run -itd -p 8040:8042 --net=hadoop --name hadoop-worker1 --hostname hadoop-worker1 liliasfaxi/hadoop-cluster:latest
-docker run -itd -p 8041:8042 --net=hadoop --name hadoop-worker2 --hostname hadoop-worker2 liliasfaxi/hadoop-cluster:latest
+docker run -itd -p 8040:8042 --net=hadoop \
+  --name hadoop-worker1 --hostname hadoop-worker1 \
+  liliasfaxi/hadoop-cluster:latest
+
+docker run -itd -p 8041:8042 --net=hadoop \
+  --name hadoop-worker2 --hostname hadoop-worker2 \
+  liliasfaxi/hadoop-cluster:latest
 ```
 
-## Step 3: Setting Up Hadoop and Uploading Files
+## 📁 Step 3: Setting Up Hadoop
 
 Initialize Hadoop and prepare the input directory:
 
@@ -61,28 +75,25 @@ hdfs dfs -ls input
 hdfs dfs -tail input/words.txt
 ```
 
-## Step 4: Creating Maven Project Files
+## 📝 Step 4: Creating Maven Project
 
-Create the following Java files for the Word Count MapReduce job:
-
-### TokenizerMapper.java
+### 🔤 TokenizerMapper.java
 
 ```java
 package hadoop.mapreduce;
 
 import java.io.IOException;
 import java.util.StringTokenizer;
-
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
 public class TokenizerMapper extends Mapper<Object, Text, Text, IntWritable> {
-
     private final static IntWritable one = new IntWritable(1);
     private Text word = new Text();
 
-    public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
+    public void map(Object key, Text value, Context context)
+        throws IOException, InterruptedException {
         StringTokenizer itr = new StringTokenizer(value.toString());
         while (itr.hasMoreTokens()) {
             word.set(itr.nextToken());
@@ -92,22 +103,21 @@ public class TokenizerMapper extends Mapper<Object, Text, Text, IntWritable> {
 }
 ```
 
-### IntSumReducer.java
+### ➕ IntSumReducer.java
 
 ```java
 package hadoop.mapreduce;
 
 import java.io.IOException;
-
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
 public class IntSumReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
-
     private IntWritable result = new IntWritable();
 
-    public void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
+    public void reduce(Text key, Iterable<IntWritable> values, Context context)
+        throws IOException, InterruptedException {
         int sum = 0;
         for (IntWritable val : values) {
             sum += val.get();
@@ -118,7 +128,7 @@ public class IntSumReducer extends Reducer<Text, IntWritable, Text, IntWritable>
 }
 ```
 
-### WordCount.java
+### 📊 WordCount.java
 
 ```java
 package hadoop.mapreduce;
@@ -152,9 +162,7 @@ public class WordCount {
 }
 ```
 
-### Modifying pom.xml
-
-Add the following to your `pom.xml`:
+### 📦 pom.xml Configuration
 
 ```xml
 <build>
@@ -162,13 +170,13 @@ Add the following to your `pom.xml`:
     <plugin>
       <groupId>org.apache.maven.plugins</groupId>
       <artifactId>maven-assembly-plugin</artifactId>
-      ...
+      <!-- ... -->
     </plugin>
   </plugins>
 </build>
 ```
 
-## Step 5: Building the Project
+## 🏗️ Step 5: Building the Project
 
 Build the project using Maven:
 
@@ -176,15 +184,16 @@ Build the project using Maven:
 mvn clean compile assembly:single
 ```
 
-## Step 6: Uploading JAR to Docker
+## 📤 Step 6: Uploading JAR
 
 Copy the generated JAR file to the Hadoop master container:
 
 ```bash
-docker cp target/wordcount-1.0-SNAPSHOT-jar-with-dependencies.jar hadoop-master:/root/wordcount.jar
+docker cp target/wordcount-1.0-SNAPSHOT-jar-with-dependencies.jar \
+  hadoop-master:/root/wordcount.jar
 ```
 
-## Step 7: Launching MapReduce Job
+## ▶️ Step 7: Launching MapReduce
 
 Execute the Word Count MapReduce job:
 
@@ -192,7 +201,7 @@ Execute the Word Count MapReduce job:
 hadoop jar wordcount.jar input output
 ```
 
-## Step 8: Checking Results
+## 📊 Step 8: Checking Results
 
 View the output files and their contents:
 
@@ -204,23 +213,24 @@ hdfs dfs -ls output
 hdfs dfs -cat output/part-r-00000
 ```
 
-## Step 9: Monitoring Your Job
+## 📈 Step 9: Monitoring
 
 Access the following web interfaces to monitor your Hadoop cluster:
 
-- **Namenode UI**: [http://localhost:9870](http://localhost:9870)
+| Interface                | URL                                            | Description           |
+| ------------------------ | ---------------------------------------------- | --------------------- |
+| 🖥️ Namenode UI           | [http://localhost:9870](http://localhost:9870) | View HDFS file system |
+| 📊 YARN Resource Manager | [http://localhost:8088](http://localhost:8088) | Monitor applications  |
+| 🔧 Worker Nodes          | [http://localhost:8041](http://localhost:8041) | View node metrics     |
 
-  - View HDFS file system
-  - Monitor cluster health
-  - Browse files and directories
+## 📚 Additional Resources
 
-- **YARN Resource Manager UI**: [http://localhost:8088](http://localhost:8088)
+- 📖 [Hadoop Documentation](https://hadoop.apache.org/docs/current/)
+- 🐳 [Docker Documentation](https://docs.docker.com/)
+- 📦 [Maven Documentation](https://maven.apache.org/guides/)
 
-  - Monitor running applications
-  - View cluster metrics
-  - Check resource usage
+---
 
-- **Worker Nodes**:
-  - Worker 1: [http://localhost:8041](http://localhost:8041)
-  - Worker 2: [http://localhost:8042](http://localhost:8042)
-  - View node-specific metrics and logs
+<div align="center">
+  <sub>Built with ❤️ by Your Name</sub>
+</div>

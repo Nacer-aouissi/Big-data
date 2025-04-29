@@ -1,32 +1,44 @@
-# Docker Project Setup Guide
+# 🐳 Docker Project Setup Guide
 
-## Overview
+![Docker](https://img.shields.io/badge/Docker-20.10+-blue.svg)
+![Python](https://img.shields.io/badge/Python-3.8+-green.svg)
+![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange.svg)
 
-This guide walks through setting up a Docker environment for data analysis, including creating a Docker Hub account, building images, and managing containers.
+## 📝 Overview
 
-## Prerequisites
+This guide provides a comprehensive walkthrough for setting up a Docker environment for data analysis, including:
 
-- Docker installed and running
-- Basic understanding of Docker commands
-- Internet connection for Docker Hub access
+- 🏗️ Creating a Docker Hub account
+- 🏭 Building custom images
+- 🔄 Managing containers
+- 🌐 Setting up container networking
 
-## Step 1: Docker Hub Account Setup
+## ⚙️ Prerequisites
 
-1. Visit [Docker Hub](https://hub.docker.com/)
-2. Create a free account
-3. Verify your email address
+- 🐳 Docker installed and running
+- 💻 Basic understanding of Docker commands
+- 🌐 Internet connection for Docker Hub access
 
-## Step 2: Image Creation
+## 🚀 Step-by-Step Guide
 
-### Project Structure
+### 1️⃣ Docker Hub Account Setup
 
-Prepare your project folder with the following files:
+1. 🌐 Visit [Docker Hub](https://hub.docker.com/)
+2. 📝 Create a free account
+3. ✉️ Verify your email address
 
-- Dockerfile
-- Required Python scripts
-- Data files
+### 2️⃣ Image Creation
 
-### Dockerfile Configuration
+#### 📁 Project Structure
+
+```
+project/
+├── 📄 Dockerfile
+├── 📄 Python scripts
+└── 📁 Data files
+```
+
+#### 🛠️ Dockerfile Configuration
 
 ```dockerfile
 # Base image with Jupyter and Python
@@ -50,45 +62,45 @@ WORKDIR /home/jovyan/work
 EXPOSE 8888
 ```
 
-### Building the Image
+#### 🏗️ Building the Image
 
 ```bash
 docker build -t username/image_name .
 ```
 
-## Step 3: Pushing to Docker Hub
+### 3️⃣ Pushing to Docker Hub
 
-### Login to Docker Hub
+#### 🔑 Login to Docker Hub
 
 ```bash
 docker login
 ```
 
-### Push the Image
+#### 📤 Push the Image
 
 ```bash
 docker push username/image_name
 ```
 
-## Step 4: Network Setup
+### 4️⃣ Network Setup
 
-### Create Docker Network
+#### 🌐 Create Docker Network
 
 ```bash
 docker network create network_name
 ```
 
-## Step 5: Container Management
+### 5️⃣ Container Management
 
-### Launch Containers
+#### 🚀 Launch Containers
 
-1. Pull the image:
+1. 📥 Pull the image:
 
 ```bash
 docker pull yourdockerhubusername/tp03image
 ```
 
-2. Run containers:
+2. 🏃 Run containers:
 
 ```bash
 # Container 1
@@ -101,32 +113,40 @@ docker run -d --name container2 --network network_name -p 8882:8888 username/ima
 docker run -d --name container3 --network network_name -p 8883:8888 username/image_name
 ```
 
-## Step 6: Network Verification
+### 6️⃣ Network Verification
 
-### Test Container Connectivity
+#### 🔍 Test Container Connectivity
 
-1. Access container shell:
+1. 🐚 Access container shell:
 
 ```bash
 docker exec -u 0 -it container1 bash
 ```
 
-2. Test connectivity:
+2. 🔄 Test connectivity:
 
 ```bash
 ping container2
 ping container3
 ```
 
-## Troubleshooting
+## 🛠️ Troubleshooting
 
-- If containers can't communicate, check network configuration
-- Verify port mappings are correct
-- Ensure containers are running: `docker ps`
-- Check container logs: `docker logs container_name`
+| Issue                      | Solution                               |
+| -------------------------- | -------------------------------------- |
+| 🔌 Container Communication | Check network configuration            |
+| 🔄 Port Mapping            | Verify port mappings are correct       |
+| 🏃 Container Status        | Check with `docker ps`                 |
+| 📝 Container Logs          | View with `docker logs container_name` |
 
-## Additional Resources
+## 📚 Additional Resources
 
-- [Docker Documentation](https://docs.docker.com/)
-- [Docker Hub](https://hub.docker.com/)
-- [Docker Network Documentation](https://docs.docker.com/network/)
+- 📖 [Docker Documentation](https://docs.docker.com/)
+- 🌐 [Docker Hub](https://hub.docker.com/)
+- 🔗 [Docker Network Documentation](https://docs.docker.com/network/)
+
+---
+
+<div align="center">
+  <sub>Built with ❤️ by Your Name</sub>
+</div>

@@ -1,12 +1,12 @@
-# 🐳 Docker Project Setup Guide
+# 🍃 MongoDB Project Setup Guide
 
+![MongoDB](https://img.shields.io/badge/MongoDB-5.0+-green.svg)
+![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
 ![Docker](https://img.shields.io/badge/Docker-20.10+-blue.svg)
-![Python](https://img.shields.io/badge/Python-3.8+-green.svg)
-![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange.svg)
 
 ## 📝 Overview
 
-This guide provides a comprehensive walkthrough for setting up a Docker environment for data analysis, including:
+This guide provides a comprehensive walkthrough for setting up a MongoDB environment for data analysis, including:
 
 - 🏗️ Creating a Docker Hub account
 - 🏭 Building custom images

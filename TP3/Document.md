@@ -107,9 +107,3 @@ classification_report(y_test, y_pred)
 2. 🔍 Use top slicers for group exploration
 3. 👆 Right-click for detailed drill-through
 4. 📊 Apply filters for comparative analysis
-
----
-
-<div align="center">
-  <sub>Built with ❤️ by Your Name</sub>
-</div>

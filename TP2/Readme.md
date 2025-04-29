@@ -61,9 +61,3 @@ The goal is to determine which method is the fastest and most suitable for proce
 ## 📈 Results
 
 > 🔄 _Results and comparisons will be added after running the analysis_
-
----
-
-<div align="center">
-  <sub>Built with ❤️ by Your Name</sub>
-</div>

@@ -20,6 +20,7 @@
 
 - in new terminal :
   .\bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic Mytopic
+  .\bin\windows\kafka-console-consumer.bat --broker-list localhost:9092 --topic Mytopic
 
 ## Step 4 : Multi-brokers :
 

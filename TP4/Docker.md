@@ -1,25 +1,34 @@
-# Docker
+# Docker Project Setup Guide
 
-in this work we will learn how to use docker
+## Overview
 
-## Steps :
+This guide walks through setting up a Docker environment for data analysis, including creating a Docker Hub account, building images, and managing containers.
 
-- creating dockerhub account
-- image creation
-- push to dockerhub
-- creating network
-- launching
-- checking network
+## Prerequisites
 
-### creating dockerhub account :
+- Docker installed and running
+- Basic understanding of Docker commands
+- Internet connection for Docker Hub access
 
-- in https://hub.docker.com/ create a free account
+## Step 1: Docker Hub Account Setup
 
-### Image creation :
+1. Visit [Docker Hub](https://hub.docker.com/)
+2. Create a free account
+3. Verify your email address
 
-- in project folder preparing the files and add dockerfile contains :
+## Step 2: Image Creation
 
-```
+### Project Structure
+
+Prepare your project folder with the following files:
+
+- Dockerfile
+- Required Python scripts
+- Data files
+
+### Dockerfile Configuration
+
+```dockerfile
 # Base image with Jupyter and Python
 FROM jupyter/base-notebook
 
@@ -41,30 +50,83 @@ WORKDIR /home/jovyan/work
 EXPOSE 8888
 ```
 
-after that in cmd run the commnd :
-<docker build -t username/img name .>
+### Building the Image
 
-### Pushing to dockerhub:
+```bash
+docker build -t username/image_name .
+```
 
-- first login to dockerhub using : docker login
-- second push using command : docker push username/img name
+## Step 3: Pushing to Docker Hub
 
-### Create the Docker Network
+### Login to Docker Hub
 
-use command : docker network create network name
+```bash
+docker login
+```
 
-### Launching the containers :
+### Push the Image
 
-- to launch the 3 containers use command :
-  - pull the image from docker hub using : docker pull yourdockerhubusername/tp03image
-  - use the command :
-    docker run -d --name container1 --network network name -p 8881:8888 usename/img name
-    docker run -d --name container2 --network network name -p 8881:8888 usename/img name
-    docker run -d --name container3 --network network name -p 8881:8888 usename/img name
+```bash
+docker push username/image_name
+```
 
-### Checking network :
+## Step 4: Network Setup
 
-to check if the network between the 3 containers working we need to ping the containers from one another using command :
+### Create Docker Network
 
-- docker exec -u 0 -it container1 bash
-- ping container2
+```bash
+docker network create network_name
+```
+
+## Step 5: Container Management
+
+### Launch Containers
+
+1. Pull the image:
+
+```bash
+docker pull yourdockerhubusername/tp03image
+```
+
+2. Run containers:
+
+```bash
+# Container 1
+docker run -d --name container1 --network network_name -p 8881:8888 username/image_name
+
+# Container 2
+docker run -d --name container2 --network network_name -p 8882:8888 username/image_name
+
+# Container 3
+docker run -d --name container3 --network network_name -p 8883:8888 username/image_name
+```
+
+## Step 6: Network Verification
+
+### Test Container Connectivity
+
+1. Access container shell:
+
+```bash
+docker exec -u 0 -it container1 bash
+```
+
+2. Test connectivity:
+
+```bash
+ping container2
+ping container3
+```
+
+## Troubleshooting
+
+- If containers can't communicate, check network configuration
+- Verify port mappings are correct
+- Ensure containers are running: `docker ps`
+- Check container logs: `docker logs container_name`
+
+## Additional Resources
+
+- [Docker Documentation](https://docs.docker.com/)
+- [Docker Hub](https://hub.docker.com/)
+- [Docker Network Documentation](https://docs.docker.com/network/)

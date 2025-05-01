@@ -36,7 +36,7 @@ spark-shell
 ### ⚙️ Running Process
 
 ```scala
-val lines = sc.textFile("file1.txt")
+val lines = sc.textFile("words.txt")
 val words = lines.flatMap(_.split("\\s+"))
 val wc = words.map(w => (w, 1)).reduceByKey(_ + _)
 wc.saveAsTextFile("file1.count")

@@ -73,7 +73,7 @@ spark-submit \
   --class spark.batch.tp9.WordCountTask \
   --master yarn \
   --deploy-mode cluster \
-  wordcount-spark.jar input/purchases.txt out-spark2
+  wordcount-spark.jar input/words.txt out-spark2
 ```
 
 ## 3️⃣ Using Spark Streaming
@@ -124,7 +124,7 @@ nc -lk 9999
 4. 🚀 Start Spark streaming:
 
 ```bash
-spark-submit --class spark.streaming.tp22.Stream --master local stream-1.jar > out
+spark-submit --class spark.streaming.tp9.Stream --master local wordcount-spark.jar > out
 ```
 
 5. ✍️ Write some words in entry port and track the process in the 2nd port
